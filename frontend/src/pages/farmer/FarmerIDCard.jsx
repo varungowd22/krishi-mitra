@@ -162,18 +162,6 @@ export default function FarmerIDCard({ user }) {
             color: #555;
         }
 
-        .demo-badge {
-            position: absolute;
-            right: 35px;
-            top: 55px;
-            background: #48515a;
-            color: white;
-            padding: 11px 20px;
-            border-radius: 5px;
-            font-size: 17px;
-            font-weight: bold;
-        }
-
         .card-body {
             position: relative;
             height: 365px;
@@ -433,9 +421,6 @@ export default function FarmerIDCard({ user }) {
                       <p>
                           ಕೃಷಿ ಮಿತ್ರ · ರೈತ ಪ್ರೊಫೈಲ್
                       </p>
-                  </div>
-                  <div className="demo-badge">
-                      DEMO · NOT OFFICIAL
                   </div>
               </div>
 
