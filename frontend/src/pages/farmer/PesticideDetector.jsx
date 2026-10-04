@@ -50,6 +50,14 @@ export default function PesticideDetector() {
 
   const startCameraScan = async () => {
     setScanError("");
+    if (!window.isSecureContext) {
+      setScanError("Camera scanning requires HTTPS in Chrome. Open the hosted HTTPS app or enter the barcode manually.");
+      return;
+    }
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setScanError("This browser does not provide camera access. Enter the barcode manually instead.");
+      return;
+    }
     setScanning(true);
     try {
       const { Html5Qrcode } = await import("html5-qrcode");
