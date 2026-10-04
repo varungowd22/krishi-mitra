@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { CheckCircle, AlertTriangle, Edit3, X, Loader2, ExternalLink, LocateFixed, MapPin, ZoomIn, ZoomOut } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import api from "../../utils/api.js";
 import FarmerIDCard from "./FarmerIDCard.jsx";
 import WeatherAlerts from "./WeatherAlerts.jsx";
 import "./FarmerOverview.css";
+import { getCurrentLocation } from "../../utils/geolocation.js";
 
 const integrationPartners = [
   { name: "Bayer CropScience", domain: "bayer.in", url: "https://www.bayer.in/", category: "Crop science" },
@@ -43,6 +44,7 @@ function SatelliteMap({ onClose }) {
   const [zoom, setZoom] = useState(5);
   const [locationStatus, setLocationStatus] = useState("");
   const [tileError, setTileError] = useState(false);
+  const dragStart = useRef(null);
   const worldCenter = toWorldPixel(center.latitude, center.longitude, zoom);
   const centerTileX = Math.floor(worldCenter.x / TILE_SIZE);
   const centerTileY = Math.floor(worldCenter.y / TILE_SIZE);
@@ -76,29 +78,41 @@ function SatelliteMap({ onClose }) {
     setCenter(nextCenter);
   };
 
-  const locateFarmer = () => {
-    if (!navigator.geolocation) {
-      setLocationStatus("This browser does not support location access.");
-      return;
-    }
+  const handleMapPointerDown = (event) => {
+    if (event.target.closest?.("button")) return;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    dragStart.current = {
+      pointerId: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      worldCenter,
+    };
+  };
 
+  const handleMapPointerMove = (event) => {
+    if (dragStart.current?.pointerId !== event.pointerId) return;
+    const drag = dragStart.current;
+    setCenter(fromWorldPixel(
+      drag.worldCenter.x - (event.clientX - drag.x),
+      drag.worldCenter.y - (event.clientY - drag.y),
+      zoom,
+    ));
+  };
+
+  const handleMapPointerEnd = (event) => {
+    if (dragStart.current?.pointerId === event.pointerId) dragStart.current = null;
+  };
+
+  const locateFarmer = async () => {
     setLocationStatus("Getting your location...");
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
-        setCenter({ latitude: coords.latitude, longitude: coords.longitude });
-        setZoom(16);
-        setLocationStatus("Map centered on your current location.");
-      },
-      (error) => {
-        const message = error.code === error.PERMISSION_DENIED
-          ? "Location permission was denied. Enable it in your browser to center the map."
-          : error.code === error.POSITION_UNAVAILABLE
-            ? "Your current location is unavailable."
-            : "Location lookup timed out. Please try again.";
-        setLocationStatus(message);
-      },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 },
-    );
+    try {
+      const location = await getCurrentLocation();
+      setCenter(location);
+      setZoom(16);
+      setLocationStatus("Map centered on your current location.");
+    } catch (error) {
+      setLocationStatus(error.message);
+    }
   };
 
   return (
@@ -133,7 +147,15 @@ function SatelliteMap({ onClose }) {
 
         {locationStatus && <div role="status" style={{ marginBottom: "8px", color: "var(--km-ink-soft)", fontSize: "0.82rem" }}>{locationStatus}</div>}
 
-        <div aria-label="Satellite imagery map" role="img" style={{ position: "relative", height: "min(62vh, 560px)", minHeight: "320px", overflow: "hidden", borderRadius: "10px", background: "#d8ded4" }}>
+        <div
+          aria-label="Satellite imagery map. Drag to move the map."
+          role="application"
+          onPointerDown={handleMapPointerDown}
+          onPointerMove={handleMapPointerMove}
+          onPointerUp={handleMapPointerEnd}
+          onPointerCancel={handleMapPointerEnd}
+          style={{ position: "relative", height: "min(62vh, 560px)", minHeight: "320px", overflow: "hidden", borderRadius: "10px", background: "#d8ded4", touchAction: "none", cursor: "grab" }}
+        >
           {tiles.map((tile) => (
             <img
               key={tile.key}
@@ -145,8 +167,8 @@ function SatelliteMap({ onClose }) {
           ))}
           <div aria-hidden="true" style={{ position: "absolute", left: "50%", top: "50%", width: "18px", height: "18px", borderRadius: "50% 50% 50% 0", border: "2px solid #fff", background: "#d32f2f", boxShadow: "0 1px 5px #0008", transform: "translate(-50%, -100%) rotate(-45deg)", pointerEvents: "none" }} />
           {tileError && (
-            <div role="status" style={{ position: "absolute", top: "10px", left: "10px", right: "10px", padding: "10px", borderRadius: "6px", background: "#fff", color: "#9b1c1c", fontSize: "0.82rem" }}>
-              Some satellite tiles could not be loaded. Check your internet connection and try again.
+            <div role="status" style={{ position: "absolute", top: "10px", left: "10px", right: "58px", padding: "10px", borderRadius: "6px", background: "#fff", color: "#9b1c1c", fontSize: "0.82rem" }}>
+              Satellite imagery could not load. You can still open this location in Google Maps.
             </div>
           )}
           <div style={{ position: "absolute", right: "10px", top: "10px", display: "grid", gap: "6px" }}>
@@ -167,6 +189,14 @@ function SatelliteMap({ onClose }) {
             Tiles © Esri, Maxar, Earthstar Geographics, and the GIS User Community
           </div>
         </div>
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${center.latitude},${center.longitude}`}
+          target="_blank"
+          rel="noreferrer"
+          style={{ display: "inline-flex", marginTop: "10px", color: "var(--km-forest)", fontWeight: 700, fontSize: "0.85rem" }}
+        >
+          Open this location in Google Maps
+        </a>
         <p style={{ margin: "10px 0 0", color: "var(--km-ink-soft)", fontSize: "0.78rem" }}>
           Satellite basemap imagery is not live and does not provide NDVI or crop-health measurements. Allow location access to center the map on your farm.
         </p>

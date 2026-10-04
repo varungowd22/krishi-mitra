@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Plane, Tractor, Calendar, MapPin, Calculator, Play, Video, CheckCircle, ChevronRight, Volume2, VolumeX, X, Clock } from "lucide-react";
 import "./Drones.css";
 import { loadWorkspace, saveWorkspace } from "../../utils/workspace.js";
+import { getCurrentLocation } from "../../utils/geolocation.js";
 
 export default function Drones() {
   const [activeTab, setActiveTab] = useState("drones");
@@ -13,8 +14,9 @@ export default function Drones() {
   const [acres, setAcres] = useState(1);
   const [crop, setCrop] = useState("Paddy");
   const [purpose, setPurpose] = useState("Pesticide Spray");
-  const [location, setLocation] = useState("13.0827, 77.5877");
+  const [location, setLocation] = useState("");
   const [isLocating, setIsLocating] = useState(false);
+  const [locationError, setLocationError] = useState("");
   const [bookings, setBookings] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
   const [bookingMessage, setBookingMessage] = useState("");
@@ -73,6 +75,10 @@ export default function Drones() {
       setBookingError("Enter a valid farm size of at least one acre.");
       return;
     }
+    if (!location.trim()) {
+      setBookingError("Set your farm location using GPS or enter it manually.");
+      return;
+    }
     const booking = {
       id: `DR-${crypto.randomUUID()}`,
       crop,
@@ -96,22 +102,17 @@ export default function Drones() {
     }
   };
 
-  const handleGetLocation = () => {
-    if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser");
-      return;
-    }
+  const handleGetLocation = async () => {
     setIsLocating(true);
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocation(`${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)}`);
-        setIsLocating(false);
-      },
-      (error) => {
-        alert("Unable to retrieve your location");
-        setIsLocating(false);
-      }
-    );
+    setLocationError("");
+    try {
+      const coordinates = await getCurrentLocation();
+      setLocation(`${coordinates.latitude.toFixed(4)}, ${coordinates.longitude.toFixed(4)}`);
+    } catch (error) {
+      setLocationError(error.message);
+    } finally {
+      setIsLocating(false);
+    }
   };
 
   const equipment = [
@@ -190,22 +191,41 @@ export default function Drones() {
                  </div>
 
                  <div>
-                    <label style={{ fontSize: "0.8rem", fontWeight: "bold", color: "var(--km-ink-soft)" }}>Farm Location (GPS)</label>
+                    <label style={{ fontSize: "0.8rem", fontWeight: "bold", color: "var(--km-ink-soft)" }}>Farm Location (GPS or address)</label>
                     <div style={{ display: "flex", gap: "10px", marginTop: "5px" }}>
-                       <input type="text" value={location} disabled style={{ flex: 1, padding: "10px", border: "1px solid #ccc", borderRadius: "4px", backgroundColor: "#f5f5f5" }} />
+                       <input
+                         type="text"
+                         value={location}
+                         onChange={(event) => { setLocation(event.target.value); setLocationError(""); }}
+                         placeholder="Use GPS or enter your farm location"
+                         aria-label="Farm location"
+                         style={{ flex: 1, minWidth: 0, padding: "10px", border: "1px solid #ccc", borderRadius: "4px" }}
+                       />
                        <button 
                          type="button"
                          onClick={handleGetLocation} 
                          disabled={isLocating}
+                         aria-label={isLocating ? "Getting current location" : "Use current location"}
                          className="km-btn km-btn--outline" 
                          style={{ padding: "0 15px" }}
                          title="Use Current Location"
                        >
-                         {isLocating ? <MapPin size={18} className="animate-spin" /> : <MapPin size={18} />}
+                         {isLocating ? <MapPin size={18} className="km-spin" /> : <MapPin size={18} />}
                        </button>
                     </div>
+                    {location.trim() && (
+                      <a
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.trim())}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ display: "inline-flex", marginTop: "6px", color: "var(--km-forest)", fontSize: "0.8rem" }}
+                      >
+                        Check this location in Google Maps
+                      </a>
+                    )}
                  </div>
 
+                 {locationError && <div role="alert" style={{ color: "var(--km-alert)", fontSize: "0.85rem" }}>{locationError}</div>}
                  {bookingError && <div role="alert" style={{ color: "var(--km-alert)", fontSize: "0.85rem" }}>{bookingError}</div>}
                  {bookingMessage && <div role="status" style={{ color: "var(--km-success)", fontSize: "0.85rem" }}>{bookingMessage}</div>}
                  <button type="button" disabled={isBooking} onClick={handleBooking} className="km-btn km-btn--primary" style={{ marginTop: "10px", width: "100%", padding: "12px", fontSize: "1rem" }}>

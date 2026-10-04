@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Zap, MapPin, Calculator, AlertTriangle, Clock, Battery, BatteryCharging, CheckCircle } from "lucide-react";
 import api from "../../utils/api.js";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { getCurrentLocation } from "../../utils/geolocation.js";
 
 const toMinutes = (time) => {
   if (!time) return null;
@@ -104,15 +105,11 @@ export default function Power() {
     .filter((window) => toMinutes(window.start) > currentMinutes)
     .sort((a, b) => toMinutes(a.start) - toMinutes(b.start))[0];
 
-  const handleUseCurrentLocation = () => {
-    if (!navigator.geolocation) {
-      setLocationError("GPS is not available in this browser. Select your district and taluk instead.");
-      return;
-    }
+  const handleUseCurrentLocation = async () => {
     setIsLocating(true);
     setLocationError("");
-    navigator.geolocation.getCurrentPosition(async ({ coords }) => {
-      const coordinates = { latitude: coords.latitude, longitude: coords.longitude };
+    try {
+      const coordinates = await getCurrentLocation();
       setLocation({ ...coordinates, label: "GPS location found" });
       try {
         const response = await fetch(
@@ -147,15 +144,10 @@ export default function Power() {
       } finally {
         setIsLocating(false);
       }
-    }, (error) => {
-      const message = error.code === error.PERMISSION_DENIED
-        ? "Location permission was denied. Allow GPS access or select your district and taluk manually."
-        : error.code === error.TIMEOUT
-          ? "GPS location timed out. Try again or select your district and taluk manually."
-          : "Could not read your GPS location. Select your district and taluk manually.";
-      setLocationError(message);
+    } catch (error) {
+      setLocationError(`${error.message} You can also select your district and taluk manually.`);
       setIsLocating(false);
-    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 });
+    }
   };
 
   const handleReportPower = async () => {

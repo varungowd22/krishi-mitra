@@ -191,12 +191,17 @@ Try scanning barcode `8901030875315` in the Pesticide Detector for a
 
 ---
 
-## 5. Camera Barcode Scanning Note
+## 5. Mobile GPS and Camera Requirements
 
-The Fake Pesticide Detector's "Open Camera to Scan" button requires the
-browser to grant camera permission, and (outside of `localhost`) requires
-HTTPS. If camera access fails or is unavailable, the manual barcode entry
-field below it works identically.
+Phone GPS and camera scanning require browser permission and a secure HTTPS
+site. Plain-HTTP local Wi-Fi addresses such as `http://192.168.x.x:5173` are
+not secure contexts on iPhone or Android, so GPS and camera access will be
+blocked there. Open the deployed HTTPS site on each phone instead; during
+local development, `localhost` is allowed on the computer running the app.
+If a phone cannot get a location, allow location access for the site in the
+browser and turn on the phone's Location Services. GPS actions show manual
+area-selection alternatives where available. If camera access is unavailable,
+the manual barcode entry field works identically.
 
 ---
 

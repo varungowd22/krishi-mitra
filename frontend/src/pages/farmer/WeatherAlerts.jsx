@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { BellRing, CheckCircle2, CloudRain, LocateFixed, Snowflake, Sun, TriangleAlert } from "lucide-react";
 import api from "../../utils/api.js";
 import "./WeatherAlerts.css";
+import { getCurrentLocation } from "../../utils/geolocation.js";
 
 const DEFAULT_PREFERENCES = { enabled: false, sms: true, whatsapp: true };
 
@@ -73,35 +74,24 @@ export default function WeatherAlerts({ farmerPhone }) {
     return () => { cancelled = true; };
   }, [farmerPhone, loadForecast]);
 
-  const handleLocate = () => {
-    if (!navigator.geolocation) {
-      setErrorMessage("This browser does not support GPS location.");
-      return;
-    }
+  const handleLocate = async () => {
     setErrorMessage("");
     setStatusMessage("");
     setIsLocating(true);
-    navigator.geolocation.getCurrentPosition(
-      async ({ coords }) => {
-        const location = { latitude: coords.latitude, longitude: coords.longitude };
-        setCoordinates(location);
-        setLocationLabel(`${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}`);
-        try {
-          await loadForecast(location.latitude, location.longitude);
-        } catch {
-          setErrorMessage("Could not load a forecast for this location. Check your internet connection and try again.");
-        } finally {
-          setIsLocating(false);
-        }
-      },
-      (error) => {
-        setErrorMessage(error.code === error.PERMISSION_DENIED
-          ? "Allow location access in your browser to set your farm location."
-          : "Could not determine your location. Please try again.");
-        setIsLocating(false);
-      },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 },
-    );
+    try {
+      const location = await getCurrentLocation();
+      setCoordinates(location);
+      setLocationLabel(`${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}`);
+      try {
+        await loadForecast(location.latitude, location.longitude);
+      } catch {
+        setErrorMessage("Could not load a forecast for this location. Check your internet connection and try again.");
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+    } finally {
+      setIsLocating(false);
+    }
   };
 
   const handleSave = async (event) => {
