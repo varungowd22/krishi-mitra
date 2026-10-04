@@ -106,6 +106,32 @@ immediately and retry database synchronization when the connection returns.
 These offline copies are device-local until synchronization completes and are
 not available on another device beforehand.
 
+### AI crop disease scan
+
+The disease scanner sends JPG, PNG, or WebP images up to 5 MB to Gemini from
+the backend; the API key is never sent to the browser. Set `GEMINI_API_KEY`
+in `backend/.env` for local development and in the backend host's private
+environment settings for deployment. `GEMINI_MODEL` can select another
+vision-capable Gemini model available to your API key. If the key is missing,
+the scanner reports that configuration is needed instead of showing a made-up
+diagnosis.
+
+Scan history is saved only when MongoDB is connected. The AI output is an
+initial visual screening, not a confirmed diagnosis or verified government
+recommendation. Confirm the cause and any product registration, label, and
+dosage with a local agriculture extension officer before treatment.
+
+### Emergency SOS alerts
+
+Farmer SOS submissions are stored in MongoDB and appear in the officer
+dashboard's emergency monitor, which checks for new alerts every five seconds
+while the signed-in officer keeps the dashboard open. The officer can enable
+device sound and browser notifications from the monitor; the farmer's phone
+plays a short siren three seconds after the API confirms the SOS. Browser sound
+and notification permissions, device sound settings, a reachable API, and a
+connected MongoDB are required. This prototype does not send SMS, place calls,
+or dispatch emergency services. Call **112** for immediate emergency help.
+
 ### Fixing an unavailable irrigation schedule
 
 The irrigation API requires MongoDB. This project reads the connection string
@@ -225,7 +251,9 @@ for a static frontend and Node API. To deploy:
    string as `MONGO_URI` when Render requests the unsynced secret.
 2. Create or sign in to GitHub, push this repository, and import it into Render
    as a Blueprint. The blueprint generates a production `JWT_SECRET` and
-   configures the frontend API URL and SPA route rewrites.
+   configures the frontend API URL and SPA route rewrites. Add `GEMINI_API_KEY`
+   to the backend service's private environment settings to enable crop scans;
+   keep the key out of GitHub and the frontend settings.
 3. Set a strong database user password, allow network access from Render
    using your production network policy, and wait for both services to deploy.
 4. Open the Render static-site URL over HTTPS. Scan the QR code on the login

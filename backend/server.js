@@ -12,6 +12,7 @@ import userRoutes from "./routes/userRoutes.js";
 import workspaceRoutes from "./routes/workspaceRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import irrigationRoutes from "./routes/irrigationRoutes.js";
+import diseaseRoutes from "./routes/diseaseRoutes.js";
 import sosRoutes from "./routes/sosRoutes.js";
 import weatherAlertRoutes from "./routes/weatherAlertRoutes.js";
 import { checkAndSendWeatherAlerts } from "./services/weatherAlerts.js";
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
     "/api/auth/login",
     "/api/loans/check-eligibility",
     "/api/loans/dairy-estimate",
+    "/api/disease/analyze",
   ];
   if (!isWrite || readOnlyPostRoutes.includes(req.path)) return next();
   if (mongoose.connection.readyState === 1) return next();
@@ -43,6 +45,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/workspace", workspaceRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/irrigation", irrigationRoutes);
+app.use("/api/disease", diseaseRoutes);
 app.use("/api/loans", loanRoutes);
 app.use("/api/ams", amsRoutes);
 app.use("/api/power", powerRoutes);

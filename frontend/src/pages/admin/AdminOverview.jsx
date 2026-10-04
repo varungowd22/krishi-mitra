@@ -1,19 +1,16 @@
 import { useEffect, useState } from "react";
-import { Users, AlertTriangle, FileWarning, Droplets, ScanLine, AlertOctagon, CheckCircle, Store, ShieldCheck, ShoppingCart } from "lucide-react";
+import { Users, AlertTriangle, FileWarning, Droplets, ScanLine, Store, ShieldCheck, ShoppingCart } from "lucide-react";
 import api from "../../utils/api.js";
 
 export default function AdminOverview() {
   const [stats, setStats] = useState({ loans: 0, riskLoans: 0, claims: 0, pendingClaims: 0, slots: 0, counterfeitScans: 0 });
-  const [sosAlerts, setSosAlerts] = useState([]);
-
   useEffect(() => {
     (async () => {
-      const [loans, claims, slots, scans, sos] = await Promise.all([
+      const [loans, claims, slots, scans] = await Promise.all([
         api.get("/loans/all"),
         api.get("/ams/insurance/all"),
         api.get("/irrigation"),
-        api.get("/products/scans/counterfeit-report"),
-        api.get("/sos/active")
+        api.get("/products/scans/counterfeit-report")
       ]);
       setStats({
         loans: loans.data.length,
@@ -23,18 +20,8 @@ export default function AdminOverview() {
         slots: slots.data.length,
         counterfeitScans: scans.data.length,
       });
-      setSosAlerts(sos.data);
     })();
   }, []);
-
-  const resolveSOS = async (id) => {
-    try {
-      await api.patch(`/sos/${id}/resolve`);
-      setSosAlerts(sosAlerts.filter(a => a._id !== id));
-    } catch (err) {
-      alert(err.response?.data?.message || "SOS resolution was not saved.");
-    }
-  };
 
   const cards = [
     { icon: Users, label: "Total Loan Records", value: stats.loans, color: "var(--km-forest)" },
@@ -56,39 +43,6 @@ export default function AdminOverview() {
           </div>
         ))}
       </div>
-
-      {sosAlerts.length > 0 && (
-        <div style={{ marginTop: "30px" }}>
-          <h2 style={{ fontSize: "1.2rem", color: "#d32f2f", display: "flex", alignItems: "center", gap: "8px", borderBottom: "2px solid #d32f2f", paddingBottom: "10px", marginBottom: "15px" }}>
-            <AlertOctagon /> ACTIVE SOS ALERTS ({sosAlerts.length})
-          </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-            {sosAlerts.map(alert => (
-              <div key={alert._id} className="km-card" style={{ borderLeft: "5px solid #d32f2f", backgroundColor: "#fff5f5" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                  <div>
-                    <div style={{ fontSize: "1.1rem", fontWeight: "bold", color: "#d32f2f", marginBottom: "5px" }}>
-                      {alert.emergencyType}
-                    </div>
-                    <div style={{ fontSize: "0.9rem", color: "var(--km-ink)", marginBottom: "4px" }}>
-                      <strong>Farmer:</strong> {alert.farmer?.name} ({alert.farmer?.phone})
-                    </div>
-                    <div style={{ fontSize: "0.85rem", color: "var(--km-ink-soft)" }}>
-                      <strong>Location:</strong> {alert.location?.address}
-                    </div>
-                    <div style={{ fontSize: "0.75rem", color: "#666", marginTop: "8px" }}>
-                      Triggered: {new Date(alert.createdAt).toLocaleString()}
-                    </div>
-                  </div>
-                  <button onClick={() => resolveSOS(alert._id)} style={{ padding: "8px 12px", background: "var(--km-success)", color: "white", border: "none", borderRadius: "5px", fontWeight: "bold", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px" }}>
-                    <CheckCircle size={16}/> Mark Resolved
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Admin Vendor & Product Management Section added for Phase 3 */}
       <div style={{ marginTop: "30px", borderTop: "2px solid var(--km-line)", paddingTop: "20px" }}>

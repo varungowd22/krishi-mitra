@@ -16,14 +16,15 @@ router.post("/trigger", allowRoles("farmer"), async (req, res) => {
     });
     return res.status(201).json({
       success: true,
-      message: "SOS alert saved. No live emergency dispatch is configured; call 112 for immediate help.",
+      message: "SOS alert was saved for the Krishi Mitra officer dashboard. Call 112 for immediate emergency help.",
       caseId: `SOS-${alert._id}`,
-      estimatedResponse: "15-30 minutes",
+      estimatedResponse: "Officer response time is not guaranteed.",
       emergencyType: alert.emergencyType,
       helpline: "112",
       alert,
     });
   } catch (err) {
+    console.error("Failed to save SOS alert.", err);
     return res.status(500).json({ message: "Failed to save SOS alert" });
   }
 });
@@ -36,6 +37,7 @@ router.get("/active", allowRoles("admin"), async (req, res) => {
       .lean();
     return res.json(alerts);
   } catch (err) {
+    console.error("Failed to load active SOS alerts.", err);
     return res.status(500).json({ message: "Failed to load active SOS alerts" });
   }
 });
@@ -51,6 +53,7 @@ router.patch("/:id/resolve", allowRoles("admin"), async (req, res) => {
     return res.json(alert);
   } catch (err) {
     if (err.name === "CastError") return res.status(400).json({ message: "Invalid SOS alert ID" });
+    console.error("Failed to resolve SOS alert.", err);
     return res.status(500).json({ message: "Failed to resolve SOS alert" });
   }
 });

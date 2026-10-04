@@ -7,6 +7,7 @@ import AdminMandi from "./AdminMandi.jsx";
 import AdminInsurance from "./AdminInsurance.jsx";
 import AdminIrrigation from "./AdminIrrigation.jsx";
 import AdminProducts from "./AdminProducts.jsx";
+import AdminSOSMonitor from "./AdminSOSMonitor.jsx";
 
 const TABS = [
   { key: "overview", icon: LayoutDashboard, label: "Overview", Component: AdminOverview },
@@ -31,6 +32,7 @@ export default function AdminDashboard() {
           </div>
         ))}
       </nav>
+      <AdminSOSMonitor />
       <main className="km-main">
         <ActiveComponent />
       </main>

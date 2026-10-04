@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Wallet, TrendingUp, FileWarning, Droplets, ScanLine, LayoutDashboard, Plane, Droplet, Zap, Truck, AlertOctagon, X, ShoppingCart, Film } from "lucide-react";
 import api from "../../utils/api.js";
 import Header from "../../components/Header.jsx";
@@ -19,6 +19,7 @@ import Marketplace from "./Marketplace.jsx";
 import CropHealth from "./CropHealth.jsx";
 import { Satellite } from "lucide-react";
 import FutureFarming from "./FutureFarming.jsx";
+import { createEmergencyAudioContext, playEmergencySiren } from "../../utils/emergencyAudio.js";
 
 const TABS = [
   { key: "overview", icon: LayoutDashboard, labelKey: "overview", Component: FarmerOverview },
@@ -45,46 +46,60 @@ export default function FarmerDashboard() {
   const [showSOS, setShowSOS] = useState(false);
   const [sosType, setSosType] = useState("Medical");
   const [sendingSOS, setSendingSOS] = useState(false);
+  const [sosMessage, setSosMessage] = useState("");
+  const [sosCaseId, setSosCaseId] = useState("");
+  const [sosSoundError, setSosSoundError] = useState("");
+  const sosAudioContext = useRef(null);
+  const sirenTimer = useRef(null);
 
-  const playSiren = () => {
-    try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) return;
-      const ctx = new AudioContext();
-      const osc = ctx.createOscillator();
-      const gainNode = ctx.createGain();
-      
-      osc.type = "square";
-      osc.frequency.setValueAtTime(400, ctx.currentTime);
-      osc.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.5);
-      osc.frequency.linearRampToValueAtTime(400, ctx.currentTime + 1.0);
-      osc.frequency.linearRampToValueAtTime(800, ctx.currentTime + 1.5);
-      osc.frequency.linearRampToValueAtTime(400, ctx.currentTime + 2.0);
-      
-      gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.0);
-      
-      osc.connect(gainNode);
-      gainNode.connect(ctx.destination);
-      
-      osc.start();
-      osc.stop(ctx.currentTime + 2.0);
-    } catch (err) {
-      console.warn("Audio play failed", err);
-    }
-  };
+  useEffect(() => () => {
+    window.clearTimeout(sirenTimer.current);
+    void sosAudioContext.current?.close();
+  }, []);
 
   const handleSOS = async () => {
+    if (sendingSOS) return;
     setSendingSOS(true);
-    playSiren(); // Play siren sound immediately
+    setSosMessage("");
+    setSosCaseId("");
+    setSosSoundError("");
+    window.clearTimeout(sirenTimer.current);
+    if (sosAudioContext.current && sosAudioContext.current.state !== "closed") {
+      void sosAudioContext.current.close();
+    }
+    sosAudioContext.current = null;
+    try {
+      sosAudioContext.current = createEmergencyAudioContext();
+      if (sosAudioContext.current) await sosAudioContext.current.resume();
+    } catch (error) {
+      setSosSoundError(error.message || "Emergency sound could not be enabled on this phone.");
+      void sosAudioContext.current?.close();
+      sosAudioContext.current = null;
+    }
+
     try {
       const { data } = await api.post("/sos/trigger", { emergencyType: sosType });
-      alert(data.message);
+      setSosCaseId(data.caseId);
+      setSosMessage(data.message);
+      sirenTimer.current = window.setTimeout(() => {
+        try {
+          playEmergencySiren(sosAudioContext.current);
+          sirenTimer.current = window.setTimeout(() => {
+            void sosAudioContext.current?.close();
+            sosAudioContext.current = null;
+          }, 2300);
+        } catch (error) {
+          setSosSoundError(error.message || "Emergency sound could not play on this phone.");
+        }
+      }, 3000);
       setShowSOS(false);
     } catch (err) {
-      alert(`${err.response?.data?.message || "SOS alert was not saved."} Please call 112 directly.`);
+      setSosMessage(`${err.response?.data?.message || "SOS alert was not saved."} Please call 112 directly.`);
+      void sosAudioContext.current?.close();
+      sosAudioContext.current = null;
+    } finally {
+      setSendingSOS(false);
     }
-    setSendingSOS(false);
   };
 
   return (
@@ -104,6 +119,15 @@ export default function FarmerDashboard() {
         ))}
       </nav>
       <main className="km-main">
+        {sosMessage && (
+          <div role="status" className="km-card" style={{ marginBottom: 16, borderLeft: "5px solid #d32f2f" }}>
+            <strong style={{ color: "#b42318" }}>Emergency SOS</strong>
+            <p style={{ margin: "8px 0" }}>{sosMessage}</p>
+            {sosCaseId && <p style={{ margin: "4px 0", fontSize: "0.85rem" }}>Case ID: {sosCaseId} · Emergency siren scheduled on this phone in 3 seconds.</p>}
+            {sosSoundError && <p style={{ margin: "4px 0", color: "#b42318", fontSize: "0.85rem" }}>{sosSoundError}</p>}
+            <a href="tel:112" style={{ color: "#b42318", fontWeight: 700 }}>Call 112 for immediate danger</a>
+          </div>
+        )}
         <ActiveComponent />
       </main>
 
@@ -112,6 +136,8 @@ export default function FarmerDashboard() {
 
       {/* Floating SOS Button */}
       <button 
+        type="button"
+        aria-label="Open emergency SOS"
         onClick={() => setShowSOS(true)}
         style={{
           position: "fixed",
@@ -138,12 +164,12 @@ export default function FarmerDashboard() {
       {showSOS && (
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.7)", zIndex: 1000, display: "flex", justifyContent: "center", alignItems: "center", padding: "20px" }}>
           <div className="km-card" style={{ width: "100%", maxWidth: "400px", borderTop: "4px solid #d32f2f", position: "relative" }}>
-             <button onClick={() => setShowSOS(false)} style={{ position: "absolute", top: "15px", right: "15px", background: "none", border: "none", cursor: "pointer" }}><X size={20}/></button>
+             <button type="button" aria-label="Close emergency SOS" onClick={() => setShowSOS(false)} style={{ position: "absolute", top: "15px", right: "15px", background: "none", border: "none", cursor: "pointer" }}><X size={20}/></button>
              <h3 style={{ fontSize: "1.2rem", color: "#d32f2f", margin: "0 0 10px 0", display: "flex", alignItems: "center", gap: "8px" }}>
                <AlertOctagon /> EMERGENCY SOS
              </h3>
              <p style={{ fontSize: "0.9rem", color: "var(--km-ink-soft)", marginBottom: "20px" }}>
-               Triggering this will alert the nearest Agricultural Officer and Emergency Services with your exact profile location.
+               This sends an alert to the officer dashboard in Krishi Mitra. Emergency services are not automatically dispatched. Call 112 for immediate help.
              </p>
              
              <div style={{ marginBottom: "20px" }}>
@@ -159,10 +185,10 @@ export default function FarmerDashboard() {
              </div>
 
              <div style={{ display: "flex", gap: "10px" }}>
-               <button onClick={handleSOS} disabled={sendingSOS} style={{ flex: 1, padding: "12px", background: "#d32f2f", color: "white", border: "none", borderRadius: "8px", fontWeight: "bold", cursor: "pointer" }}>
+               <button type="button" onClick={handleSOS} disabled={sendingSOS} style={{ flex: 1, padding: "12px", background: "#d32f2f", color: "white", border: "none", borderRadius: "8px", fontWeight: "bold", cursor: "pointer" }}>
                  {sendingSOS ? "Sending..." : "SEND SOS NOW"}
                </button>
-               <button onClick={() => setShowSOS(false)} style={{ flex: 1, padding: "12px", background: "#f1f1f1", color: "var(--km-ink)", border: "none", borderRadius: "8px", fontWeight: "bold", cursor: "pointer" }}>
+               <button type="button" onClick={() => setShowSOS(false)} style={{ flex: 1, padding: "12px", background: "#f1f1f1", color: "var(--km-ink)", border: "none", borderRadius: "8px", fontWeight: "bold", cursor: "pointer" }}>
                  Cancel
                </button>
              </div>

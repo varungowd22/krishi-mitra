@@ -8,6 +8,9 @@ const DiseaseScanSchema = new mongoose.Schema(
     confidencePercent: { type: Number, required: true },
     recommendedMedicine: { type: String },
     dosage: { type: String },
+    severity: { type: String, enum: ["low", "moderate", "high", "uncertain"] },
+    visualFindings: [{ type: String }],
+    recommendedActions: [{ type: String }],
     scanDate: { type: Date, required: true },
   },
   { timestamps: true }
