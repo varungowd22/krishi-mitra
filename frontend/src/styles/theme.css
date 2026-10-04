@@ -1,0 +1,411 @@
+/* ============================================================
+   KRISHI MITRA — DESIGN TOKENS
+   Govt portal aesthetic: deep forest green + saffron + paper
+   Signature element: rubber-stamp status badge
+   ============================================================ */
+
+:root {
+  /* Color */
+  --km-forest: #0b3d2e;
+  --km-forest-deep: #072a20;
+  --km-saffron: #e08d24;
+  --km-saffron-deep: #b96f12;
+  --km-paper: #faf7f0;
+  --km-paper-dim: #f0ead9;
+  --km-ink: #1a1a1a;
+  --km-ink-soft: #4a4a42;
+  --km-alert: #b33a3a;
+  --km-success: #2d6a4f;
+  --km-line: #d8cfb8;
+  --km-white: #ffffff;
+
+  /* Type */
+  --font-display: "Noto Serif", "Noto Serif Kannada", serif;
+  --font-body: "Noto Sans", "Noto Sans Kannada", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Layout */
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --shadow-card: 0 1px 2px rgba(11, 61, 46, 0.08), 0 2px 8px rgba(11, 61, 46, 0.06);
+  --shadow-stamp: 0 2px 6px rgba(179, 58, 58, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--km-paper-dim);
+  color: var(--km-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--km-forest-deep);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--km-forest);
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--km-saffron);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   TRICOLOR STRIP — top hairline on every page
+   ============================================================ */
+.km-tricolor-strip {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    #ff9933 0%, #ff9933 33.33%,
+    #ffffff 33.33%, #ffffff 66.66%,
+    #138808 66.66%, #138808 100%
+  );
+}
+
+/* ============================================================
+   SIGNATURE ELEMENT: RUBBER STAMP STATUS BADGE
+   Circular, rotated, ink-stamped feel — used for all statuses
+   ============================================================ */
+.km-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  transform: rotate(-2deg);
+  white-space: nowrap;
+  position: relative;
+}
+
+.km-stamp::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px dashed currentColor;
+  border-radius: 999px;
+  opacity: 0.4;
+}
+
+.km-stamp--approved, .km-stamp--genuine, .km-stamp--closed, .km-stamp--completed, .km-stamp--paid {
+  color: var(--km-success);
+  background: rgba(45, 106, 79, 0.08);
+}
+.km-stamp--rejected, .km-stamp--counterfeit, .km-stamp--overdue, .km-stamp--missed {
+  color: var(--km-alert);
+  background: rgba(179, 58, 58, 0.08);
+}
+.km-stamp--pending, .km-stamp--submitted, .km-stamp--under_review, .km-stamp--scheduled, .km-stamp--active, .km-stamp--not_found {
+  color: var(--km-saffron-deep);
+  background: rgba(224, 141, 36, 0.1);
+}
+.km-stamp--field_inspection, .km-stamp--in_progress, .km-stamp--swapped, .km-stamp--expired_registration {
+  color: var(--km-forest);
+  background: rgba(11, 61, 46, 0.07);
+}
+
+/* ============================================================
+   SHARED LAYOUT PRIMITIVES
+   ============================================================ */
+.km-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.km-header {
+  background: var(--km-forest);
+  color: var(--km-paper);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.km-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.km-emblem {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--km-saffron);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--km-paper);
+  flex-shrink: 0;
+}
+
+.km-brand-text h1 {
+  color: var(--km-paper);
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.km-brand-text .km-kannada {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  color: var(--km-saffron);
+  opacity: 0.95;
+}
+
+.km-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+.km-card {
+  background: var(--km-white);
+  border: 1px solid var(--km-line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+}
+
+.km-card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--km-line);
+}
+
+.km-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.km-grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.km-grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.km-grid-4 { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+
+.km-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1.5px solid transparent;
+  transition: transform 0.08s ease, box-shadow 0.15s ease;
+}
+.km-btn:active { transform: translateY(1px); }
+
+.km-btn--primary {
+  background: var(--km-forest);
+  color: var(--km-paper);
+}
+.km-btn--primary:hover { background: var(--km-forest-deep); }
+
+.km-btn--accent {
+  background: var(--km-saffron);
+  color: var(--km-forest-deep);
+}
+.km-btn--accent:hover { background: var(--km-saffron-deep); }
+
+.km-btn--outline {
+  background: transparent;
+  border-color: var(--km-forest);
+  color: var(--km-forest);
+}
+.km-btn--outline:hover { background: rgba(11, 61, 46, 0.06); }
+
+.km-btn--danger {
+  background: transparent;
+  border-color: var(--km-alert);
+  color: var(--km-alert);
+}
+
+.km-input, .km-select, .km-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--km-line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  background: var(--km-white);
+  color: var(--km-ink);
+}
+.km-input:focus, .km-select:focus, .km-textarea:focus {
+  border-color: var(--km-forest);
+}
+
+.km-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--km-ink-soft);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.km-field {
+  margin-bottom: 14px;
+}
+
+.km-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.km-table th {
+  text-align: left;
+  padding: 10px 12px;
+  background: var(--km-paper-dim);
+  color: var(--km-forest-deep);
+  font-weight: 700;
+  border-bottom: 2px solid var(--km-forest);
+  white-space: nowrap;
+}
+.km-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--km-line);
+}
+.km-table tr:hover td { background: rgba(11, 61, 46, 0.02); }
+
+.km-stat {
+  text-align: center;
+  padding: 16px;
+}
+.km-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--km-forest);
+}
+.km-stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--km-ink-soft);
+  margin-top: 4px;
+}
+
+.km-nav-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  background: var(--km-forest-deep);
+  padding: 0 16px;
+}
+.km-nav-tab {
+  padding: 12px 16px;
+  border: 0;
+  color: rgba(250, 247, 240, 0.65);
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.km-nav-tab:hover { color: var(--km-paper); }
+.km-nav-tab.active {
+  color: var(--km-paper);
+  border-bottom-color: var(--km-saffron);
+}
+
+.km-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--km-ink-soft);
+}
+
+.km-lang-toggle {
+  background: rgba(250, 247, 240, 0.12);
+  border: 1px solid rgba(250, 247, 240, 0.3);
+  color: var(--km-paper);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.km-badge-risk {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--km-alert);
+  background: rgba(179, 58, 58, 0.1);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 640px) {
+  .km-main { padding: 16px 12px 50px; }
+  .km-header { padding: 12px 16px; }
+  .km-table { font-size: 0.8rem; }
+  .km-table th, .km-table td { padding: 8px 6px; }
+}
+@ m e d i a   p r i n t   { 
+     b o d y   *   { 
+         v i s i b i l i t y :   h i d d e n ; 
+     } 
+     . p r i n t - o n l y ,   . p r i n t - o n l y   *   { 
+         v i s i b i l i t y :   v i s i b l e ; 
+     } 
+     . p r i n t - o n l y   { 
+         p o s i t i o n :   a b s o l u t e ; 
+         l e f t :   0 ; 
+         t o p :   0 ; 
+         w i d t h :   1 0 0 % ; 
+     } 
+     . k m - s i d e b a r ,   . k m - h e a d e r ,   . k m - t a b s ,   . k m - l a n g - t o g g l e   { 
+         d i s p l a y :   n o n e   ! i m p o r t a n t ; 
+     } 
+ }  
+ 

@@ -1,0 +1,308 @@
+.km-sponsored-card {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(11, 61, 46, 0.12);
+}
+
+.km-sponsored-card__eyebrow,
+.km-sponsored-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.km-sponsored-card__eyebrow {
+  padding: 14px 18px;
+  color: var(--km-forest-deep);
+  background: #f9f7f0;
+  border-bottom: 1px solid #e0d5c1;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.km-sponsored-card__eyebrow > span:first-child,
+.km-sponsored-card__footer > span:first-child,
+.km-ad-dialog__sponsored {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.km-sponsored-card__ad-label {
+  padding: 4px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 4px;
+  color: inherit;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.km-sponsored-card__eyebrow .km-sponsored-card__ad-label {
+  border-color: rgba(11, 61, 46, 0.2);
+  color: var(--km-forest);
+}
+
+.km-sponsored-card__content {
+  position: relative;
+  display: flex;
+  min-height: 255px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  padding: 30px clamp(22px, 6vw, 52px);
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 88% 8%, rgba(224, 141, 36, 0.48), transparent 37%),
+    linear-gradient(125deg, #072a20 2%, #0b3d2e 60%, #226448 100%);
+}
+
+.km-sponsored-card__content::after {
+  position: absolute;
+  right: -50px;
+  bottom: -115px;
+  width: 290px;
+  height: 290px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 24px rgba(255, 255, 255, 0.035), 0 0 0 50px rgba(255, 255, 255, 0.025);
+  content: "";
+  pointer-events: none;
+}
+
+.km-sponsored-card__play-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.km-sponsored-card__kicker {
+  margin: 0 0 8px;
+  color: #f4c87f;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.km-sponsored-card__content h3 {
+  max-width: 410px;
+  margin: 0;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.25;
+}
+
+.km-sponsored-card__content > p:not(.km-sponsored-card__kicker) {
+  max-width: 430px;
+  margin: 10px 0 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.km-sponsored-card__watch,
+.km-ad-dialog__skip,
+.km-ad-dialog__sound,
+.km-ad-dialog__play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.km-sponsored-card__watch {
+  position: relative;
+  z-index: 1;
+  padding: 10px 16px;
+  color: var(--km-forest-deep);
+  background: #fff;
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.km-sponsored-card__watch:hover {
+  transform: translateY(-1px);
+  background: #fff5df;
+}
+
+.km-sponsored-card__footer {
+  gap: 12px;
+  padding: 12px 18px;
+  color: var(--km-ink-soft);
+  font-size: 0.75rem;
+}
+
+.km-sponsored-card__footer > span:first-child {
+  color: var(--km-success);
+  font-weight: 600;
+}
+
+.km-ad-overlay {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 24px;
+  background: rgba(5, 18, 13, 0.78);
+  backdrop-filter: blur(5px);
+  animation: km-ad-fade-in 180ms ease-out;
+}
+
+.km-ad-dialog {
+  width: min(100%, 760px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  color: #fff;
+  background: #10251d;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+  animation: km-ad-rise-in 220ms ease-out;
+}
+
+.km-ad-dialog__header,
+.km-ad-dialog__footer,
+.km-ad-dialog__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.km-ad-dialog__header {
+  padding: 18px 22px;
+}
+
+.km-ad-dialog__sponsored {
+  color: #f4c87f;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.km-ad-dialog__header h2 {
+  margin: 6px 0 0;
+  font-size: 1.12rem;
+}
+
+.km-ad-dialog__player {
+  position: relative;
+  background: #050806;
+}
+
+.km-ad-dialog__player video {
+  display: block;
+  width: 100%;
+  max-height: min(64vh, 520px);
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
+.km-ad-dialog__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 13px 18px;
+  transform: translate(-50%, -50%);
+  color: var(--km-forest-deep);
+  background: #fff;
+}
+
+.km-ad-dialog__footer {
+  gap: 16px;
+  padding: 15px 22px;
+}
+
+.km-ad-dialog__note {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.8rem;
+}
+
+.km-ad-dialog__actions {
+  gap: 10px;
+}
+
+.km-ad-dialog__sound {
+  padding: 9px 11px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.km-ad-dialog__skip {
+  min-width: 115px;
+  padding: 9px 12px;
+  color: var(--km-forest-deep);
+  background: #fff;
+}
+
+.km-ad-dialog__skip:disabled {
+  color: rgba(255, 255, 255, 0.64);
+  background: rgba(255, 255, 255, 0.13);
+  cursor: not-allowed;
+}
+
+.km-sponsored-card__watch:focus-visible,
+.km-ad-dialog__play:focus-visible,
+.km-ad-dialog__sound:focus-visible,
+.km-ad-dialog__skip:focus-visible {
+  outline: 3px solid #f4c87f;
+  outline-offset: 3px;
+}
+
+@keyframes km-ad-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes km-ad-rise-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 540px) {
+  .km-ad-overlay {
+    padding: 12px;
+  }
+
+  .km-ad-dialog__header,
+  .km-ad-dialog__footer {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .km-ad-dialog__footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .km-ad-dialog__actions {
+    justify-content: flex-end;
+  }
+
+  .km-sponsored-card__footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .km-ad-overlay,
+  .km-ad-dialog {
+    animation: none;
+  }
+
+  .km-sponsored-card__watch {
+    transition: none;
+  }
+}

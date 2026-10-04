@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title description">
+  <title id="title">Drip Irrigation Kit for one acre</title>
+  <desc id="description">Illustration of a drip irrigation kit with filter, tubing, and water-saving drip lines in a green field.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eaf5e5"/>
+      <stop offset="1" stop-color="#c8e1bc"/>
+    </linearGradient>
+    <linearGradient id="filter" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8e3d7"/>
+      <stop offset=".45" stop-color="#fff"/>
+      <stop offset="1" stop-color="#c2d1c2"/>
+    </linearGradient>
+    <linearGradient id="pipe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#152f30"/>
+      <stop offset=".5" stop-color="#355953"/>
+      <stop offset="1" stop-color="#142d2c"/>
+    </linearGradient>
+    <filter id="shadow" x="-.4" y="-.4" width="1.8" height="1.8">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dy="11"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".19"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="600" height="600" rx="30" fill="url(#sky)"/>
+  <circle cx="485" cy="105" r="51" fill="#f5c963" opacity=".82"/>
+  <path d="M0 270q137-101 276 0t324-3v333H0z" fill="#95bb78"/>
+  <path d="M0 353q137-83 278 0t322 0v247H0z" fill="#699653"/>
+  <g fill="none" stroke="#d4e4aa" stroke-linecap="round" opacity=".8">
+    <path d="M24 383q120-67 244 0t306 0" stroke-width="8"/>
+    <path d="M24 432q120-67 244 0t306 0" stroke-width="8"/>
+    <path d="M24 481q120-67 244 0t306 0" stroke-width="8"/>
+    <path d="M24 530q120-67 244 0t306 0" stroke-width="8"/>
+  </g>
+  <g fill="none" stroke="#e4f1bf" stroke-width="4" stroke-linecap="round" opacity=".9">
+    <path d="M116 351l-9-17m9 17 11-17m111 28-10-17m10 17 11-17m112 27-10-17m10 17 11-17m111 28-10-17m10 17 11-17"/>
+    <path d="M67 407l-9-17m9 17 11-17m112 28-10-17m10 17 11-17m111 28-10-17m10 17 11-17m111 28-10-17m10 17 11-17"/>
+    <path d="M116 456l-9-17m9 17 11-17m111 28-10-17m10 17 11-17m112 28-10-17m10 17 11-17m111 28-10-17m10 17 11-17"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="M54 246h142v91H54z" rx="12" fill="#f8fbf3" stroke="#789487" stroke-width="5"/>
+    <path d="M70 259h110v64H70z" rx="6" fill="#245846"/>
+    <path d="M84 276h82m-82 13h82m-82 13h82" stroke="#9ac27e" stroke-width="4" opacity=".8"/>
+    <path d="M63 246v-19h124v19M112 227v-24h26v24" fill="none" stroke="#496c5b" stroke-width="7" stroke-linejoin="round"/>
+    <circle cx="125" cy="293" r="22" fill="#fff" stroke="#b8c9b8" stroke-width="4"/>
+    <path d="M125 293l9-12" stroke="#d69d35" stroke-width="4" stroke-linecap="round"/>
+    <path d="M196 278h30v28h-30m-142 30v26h250" fill="none" stroke="url(#pipe)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="235" y="274" width="74" height="63" rx="16" fill="url(#filter)" stroke="#718b7a" stroke-width="5"/>
+    <path d="M247 288v34m12-34v34m12-34v34m12-34v34m12-34v34" stroke="#a1b4a2" stroke-width="3"/>
+    <path d="M272 274v-18m0 81v20" stroke="#466c59" stroke-width="8" stroke-linecap="round"/>
+    <path d="M309 305h44m-68 52v24m65-24v24m65-24v24m65-24v24" fill="none" stroke="url(#pipe)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M350 379h156" stroke="#234c43" stroke-width="11" stroke-linecap="round"/>
+    <path d="M357 379v-8m33 8v-8m33 8v-8m33 8v-8m33 8v-8" stroke="#dff1ca" stroke-width="4" stroke-linecap="round"/>
+    <path d="M379 388q0 11-8 18m8-18q0 11 8 18m24-18q0 11-8 18m8-18q0 11 8 18m24-18q0 11-8 18m8-18q0 11 8 18m24-18q0 11-8 18m8-18q0 11 8 18" fill="none" stroke="#83d5e8" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="197" cy="356" r="7" fill="#e8b83f"/>
+    <circle cx="288" cy="356" r="7" fill="#e8b83f"/>
+  </g>
+  <rect x="32" y="38" width="188" height="39" rx="19" fill="#fff" opacity=".82"/>
+  <text x="126" y="63" fill="#24553e" font-family="Arial,sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="1.5">SMART WATERING</text>
+  <text x="300" y="567" fill="#fff" font-family="Arial,sans-serif" font-size="17" font-weight="700" text-anchor="middle" letter-spacing="2">DRIP IRRIGATION KIT · 1 ACRE</text>
+</svg>

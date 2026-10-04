@@ -1,0 +1,110 @@
+.km-partners {
+  margin-top: 10px;
+  padding: clamp(18px, 3vw, 26px);
+}
+
+.km-partners__heading,
+.km-partners__link-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.km-partners__heading {
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--km-line);
+}
+
+.km-partners__eyebrow {
+  color: var(--km-saffron-deep);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.km-partners__heading h3 {
+  margin: 5px 0 0;
+  color: var(--km-forest-deep);
+  font-size: 1.08rem;
+}
+
+.km-partners__count {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border: 1px solid rgba(11, 61, 46, 0.12);
+  border-radius: 20px;
+  color: var(--km-forest);
+  background: #f4f7f1;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.km-partners__intro {
+  margin: 14px 0 18px;
+  color: var(--km-ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.km-partners__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 205px), 1fr));
+  gap: 12px;
+}
+
+.km-partners__link {
+  display: flex;
+  min-width: 0;
+  min-height: 112px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--km-line);
+  border-radius: 9px;
+  color: var(--km-forest-deep);
+  background: linear-gradient(145deg, #fff 35%, #faf8f1);
+  text-decoration: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.km-partners__link-top {
+  width: 100%;
+  color: var(--km-success);
+}
+
+.km-partners__category {
+  color: var(--km-ink-soft);
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.km-partners__link strong {
+  font-size: 0.92rem;
+}
+
+.km-partners__domain {
+  margin-top: auto;
+  color: var(--km-ink-soft);
+  font-size: 0.75rem;
+}
+
+.km-partners__link:hover {
+  transform: translateY(-2px);
+  border-color: var(--km-success);
+  box-shadow: 0 5px 16px rgba(11, 61, 46, 0.1);
+}
+
+.km-partners__link:focus-visible {
+  outline: 3px solid var(--km-saffron);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .km-partners__link {
+    transition: none;
+  }
+}

@@ -1,0 +1,347 @@
+.km-loan-finder {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: var(--km-ink);
+}
+
+.km-loan-finder__hero {
+  padding: clamp(18px, 4vw, 28px);
+  border-radius: 10px;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 92% 5%, rgba(224, 141, 36, 0.35), transparent 34%),
+    linear-gradient(125deg, #072a20, #0b3d2e 65%, #256443);
+}
+
+.km-loan-finder__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #f4c87f;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.km-loan-finder__hero h2 {
+  margin: 9px 0 7px;
+  font-size: clamp(1.35rem, 3.5vw, 1.9rem);
+}
+
+.km-loan-finder__hero p {
+  max-width: 720px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.km-loan-finder__guide {
+  padding: clamp(16px, 3vw, 24px);
+  border: 1px solid rgba(34, 97, 71, 0.13);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(246, 250, 244, 1), rgba(255, 255, 255, 1));
+  box-shadow: 0 14px 28px rgba(16, 58, 41, 0.06);
+}
+
+.km-loan-finder__guide-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.km-loan-finder__guide-head h3 {
+  margin: 4px 0 0;
+  color: var(--km-forest-deep);
+  font-size: 1.08rem;
+}
+
+.km-loan-finder__guide-head p {
+  margin: 0;
+  color: var(--km-ink-soft);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.km-loan-finder__duration {
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: var(--km-forest);
+  background: rgba(39, 133, 87, 0.12);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.km-loan-finder__checklist {
+  display: grid;
+  gap: 10px;
+}
+
+.km-loan-finder__check-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 12px 12px 10px;
+  border: 1px solid rgba(34, 97, 71, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.km-loan-finder__step-number {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #164f39, #287d52);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.km-loan-finder__check-item strong {
+  display: block;
+  color: var(--km-forest-deep);
+  font-size: 0.82rem;
+}
+
+.km-loan-finder__check-item p,
+.km-loan-finder__video-note,
+.km-loan-finder__video-error {
+  margin: 5px 0 0;
+  color: var(--km-ink-soft);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.km-loan-finder__video-error {
+  color: var(--km-alert);
+}
+
+.km-loan-finder__language {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+}
+
+.km-loan-finder__language label {
+  color: var(--km-ink-soft);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.km-loan-finder__language select {
+  width: auto;
+  min-width: 120px;
+}
+
+.km-loan-finder__columns {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.9fr) minmax(300px, 1.1fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.km-loan-finder__calculators {
+  display: grid;
+  gap: 14px;
+}
+
+.km-loan-finder__panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(14px, 2.5vw, 20px);
+  border: 1px solid var(--km-line);
+  border-radius: 9px;
+  background: #fff;
+}
+
+.km-loan-finder__panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--km-forest-deep);
+  font-size: 0.98rem;
+}
+
+.km-loan-finder__calculator-icon {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border: 1.7px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.km-loan-finder__form {
+  display: grid;
+  gap: 10px;
+}
+
+.km-loan-finder__form label {
+  display: grid;
+  gap: 5px;
+  color: var(--km-ink-soft);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.km-loan-finder__form .km-input {
+  min-height: 40px;
+  font-size: 0.82rem;
+}
+
+.km-loan-finder__form .km-btn {
+  width: fit-content;
+  min-height: 38px;
+  padding: 8px 12px;
+  font-size: 0.77rem;
+}
+
+.km-loan-finder__check {
+  display: flex !important;
+  align-items: center;
+  gap: 7px !important;
+}
+
+.km-loan-finder__check input {
+  accent-color: var(--km-success);
+}
+
+.km-loan-finder__results {
+  display: grid;
+  gap: 9px;
+  padding-top: 12px;
+  border-top: 1px solid var(--km-line);
+}
+
+.km-loan-finder__results h4 {
+  margin: 0;
+  color: var(--km-forest-deep);
+  font-size: 0.84rem;
+}
+
+.km-loan-finder__scheme {
+  padding: 10px;
+  border: 1px solid var(--km-line);
+  border-radius: 7px;
+  background: #fbfcf9;
+}
+
+.km-loan-finder__scheme h5 {
+  margin: 0 0 5px;
+  color: var(--km-forest-deep);
+  font-size: 0.8rem;
+}
+
+.km-loan-finder__scheme p,
+.km-loan-finder__documents p,
+.km-loan-finder__warning {
+  margin: 0;
+  color: var(--km-ink-soft);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+.km-loan-finder__estimate,
+.km-loan-finder__calculation {
+  display: grid;
+  gap: 7px;
+  padding: 11px;
+  border-radius: 7px;
+  color: var(--km-forest-deep);
+  background: #f1f6ee;
+  font-size: 0.76rem;
+}
+
+.km-loan-finder__estimate strong {
+  font-size: 0.78rem;
+}
+
+.km-loan-finder__documents {
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 7px;
+  background: #f5f6f3;
+}
+
+.km-loan-finder__documents strong {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--km-forest-deep);
+  font-size: 0.76rem;
+}
+
+.km-loan-finder__warning {
+  padding: 9px;
+  border-left: 3px solid var(--km-saffron);
+  border-radius: 0 5px 5px 0;
+  background: #fff8e9;
+}
+
+.km-loan-finder__calculation {
+  border: 1px solid rgba(45, 106, 79, 0.13);
+}
+
+.km-loan-finder__calculation > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.km-loan-finder__calculation strong {
+  color: var(--km-forest-deep);
+  font-size: 0.82rem;
+}
+
+.km-loan-finder__calculation small {
+  color: var(--km-ink-soft);
+  line-height: 1.4;
+}
+
+.km-loan-finder__error {
+  margin: 0;
+  color: var(--km-alert);
+  font-size: 0.8rem;
+}
+
+.km-loan-finder__rate-note {
+  padding: 12px 14px;
+  border: 1px solid #f0d9a9;
+  border-radius: 8px;
+  background: #fff9eb;
+}
+
+.km-loan-finder__rate-note strong {
+  color: #70490d;
+  font-size: 0.77rem;
+}
+
+.km-loan-finder__rate-note p {
+  margin: 5px 0 0;
+  color: #65573b;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  .km-loan-finder__columns {
+    grid-template-columns: 1fr;
+  }
+}

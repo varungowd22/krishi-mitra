@@ -1,0 +1,299 @@
+.km-weather-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  border: 1px solid var(--km-line);
+}
+
+.km-weather-alerts__header,
+.km-weather-alerts__heading,
+.km-weather-alerts__location,
+.km-weather-alerts__thresholds,
+.km-weather-alerts__warning,
+.km-weather-alerts__message,
+.km-weather-alerts__clear,
+.km-weather-alerts__hint {
+  display: flex;
+  align-items: center;
+}
+
+.km-weather-alerts__header,
+.km-weather-alerts__location {
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.km-weather-alerts__heading {
+  gap: 10px;
+}
+
+.km-weather-alerts__icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--km-forest);
+  background: rgba(45, 106, 79, 0.1);
+}
+
+.km-weather-alerts__eyebrow {
+  color: var(--km-saffron-deep);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+}
+
+.km-weather-alerts__heading h2 {
+  margin-top: 3px;
+  color: var(--km-forest-deep);
+  font-size: 1.12rem;
+}
+
+.km-weather-alerts__badge,
+.km-weather-alerts__channel-status {
+  padding: 5px 8px;
+  border-radius: 20px;
+  color: var(--km-ink-soft);
+  background: #f1f0eb;
+  font-size: 0.68rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.km-weather-alerts__badge.is-active,
+.km-weather-alerts__channel-status.is-ready {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.km-weather-alerts__intro {
+  margin: 0;
+  color: var(--km-ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.km-weather-alerts__location {
+  padding: 12px;
+  border: 1px solid var(--km-line);
+  border-radius: 8px;
+  background: #fbfaf6;
+}
+
+.km-weather-alerts__location > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.km-weather-alerts__location .km-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.km-weather-alerts__label {
+  color: var(--km-ink-soft);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.km-weather-alerts__location strong {
+  overflow-wrap: anywhere;
+  color: var(--km-forest-deep);
+  font-size: 0.84rem;
+}
+
+.km-weather-alerts__location small,
+.km-weather-alerts__toggle small {
+  color: var(--km-ink-soft);
+  font-size: 0.72rem;
+}
+
+.km-weather-alerts__channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 205px), 1fr));
+  gap: 8px;
+}
+
+.km-weather-alerts__toggle {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid var(--km-line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.km-weather-alerts__toggle input {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  accent-color: var(--km-success);
+}
+
+.km-weather-alerts__toggle > span:nth-child(2) {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.km-weather-alerts__toggle strong {
+  color: var(--km-forest-deep);
+  font-size: 0.79rem;
+}
+
+.km-weather-alerts__toggle small {
+  overflow-wrap: anywhere;
+}
+
+.km-weather-alerts__channel-status {
+  padding: 4px 6px;
+  font-size: 0.61rem;
+}
+
+.km-weather-alerts__setup-note,
+.km-weather-alerts__disclaimer {
+  margin: 0;
+  color: var(--km-ink-soft);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.km-weather-alerts__setup-note {
+  padding: 9px 11px;
+  border-left: 3px solid var(--km-saffron);
+  border-radius: 0 6px 6px 0;
+  background: #fff9eb;
+}
+
+.km-weather-alerts__message {
+  gap: 6px;
+  margin: 0;
+  color: var(--km-success);
+  font-size: 0.8rem;
+}
+
+.km-weather-alerts__message.is-error {
+  color: var(--km-alert);
+}
+
+.km-weather-alerts__save {
+  width: fit-content;
+  padding: 9px 13px;
+}
+
+.km-weather-alerts__thresholds {
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  color: var(--km-ink-soft);
+  font-size: 0.7rem;
+}
+
+.km-weather-alerts__thresholds span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.km-weather-alerts__forecast {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.km-weather-alerts__day {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  border-radius: 7px;
+  background: #f4f7f1;
+}
+
+.km-weather-alerts__day strong {
+  color: var(--km-forest-deep);
+  font-size: 0.74rem;
+}
+
+.km-weather-alerts__day span {
+  color: var(--km-ink);
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+.km-weather-alerts__day small {
+  color: var(--km-ink-soft);
+  font-size: 0.68rem;
+}
+
+.km-weather-alerts__warnings {
+  display: grid;
+  gap: 7px;
+}
+
+.km-weather-alerts__warning {
+  align-items: flex-start;
+  gap: 9px;
+  padding: 10px;
+  border-left: 3px solid var(--alert-color);
+  border-radius: 0 7px 7px 0;
+  color: var(--alert-color);
+  background: color-mix(in srgb, var(--alert-color) 8%, white);
+}
+
+.km-weather-alerts__warning svg {
+  flex: 0 0 auto;
+}
+
+.km-weather-alerts__warning strong {
+  font-size: 0.78rem;
+}
+
+.km-weather-alerts__warning p {
+  margin: 4px 0 0;
+  color: var(--km-ink-soft);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.km-weather-alerts__clear,
+.km-weather-alerts__hint {
+  gap: 6px;
+  margin: 0;
+  color: var(--km-success);
+  font-size: 0.76rem;
+}
+
+.km-weather-alerts__hint {
+  color: var(--km-ink-soft);
+}
+
+.km-weather-alerts__disclaimer {
+  padding-top: 9px;
+  border-top: 1px solid var(--km-line);
+}
+
+@media (max-width: 520px) {
+  .km-weather-alerts__header {
+    align-items: flex-start;
+  }
+
+  .km-weather-alerts__badge {
+    margin-top: 3px;
+  }
+
+  .km-weather-alerts__location {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

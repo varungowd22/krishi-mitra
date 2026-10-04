@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title description">
+  <title id="title">Bayer Nativo Fungicide</title>
+  <desc id="description">Illustration of a Nativo fungicide bottle against a green agricultural background.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#143d2b"/>
+      <stop offset="1" stop-color="#38764a"/>
+    </linearGradient>
+    <linearGradient id="bottle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f3f0e4"/>
+      <stop offset=".28" stop-color="#fffdf3"/>
+      <stop offset=".72" stop-color="#f6f2e5"/>
+      <stop offset="1" stop-color="#d9ddcb"/>
+    </linearGradient>
+    <linearGradient id="label" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14683c"/>
+      <stop offset="1" stop-color="#0a422d"/>
+    </linearGradient>
+    <filter id="shadow" x="-.5" y="-.5" width="2" height="2">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14"/>
+      <feOffset dy="16"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="600" height="600" rx="30" fill="url(#background)"/>
+  <circle cx="470" cy="115" r="130" fill="#f3bd53" opacity=".14"/>
+  <path d="M0 437c115-64 174 28 284-19s185-79 316-8v190H0z" fill="#94af60" opacity=".24"/>
+  <path d="M0 492c130-52 224 38 354-11s174-45 246-18v137H0z" fill="#c1b765" opacity=".2"/>
+  <g fill="none" stroke="#d7e5ba" stroke-linecap="round" opacity=".35">
+    <path d="M61 451q48-49 94-71M77 453q10-55 3-90M507 429q-38-51-88-78M523 435q3-46 25-75" stroke-width="5"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="M258 132h84v67h35c20 0 36 16 36 36v224c0 26-21 47-47 47H234c-26 0-47-21-47-47V235c0-20 16-36 36-36h35z" fill="url(#bottle)" stroke="#d8d7c7" stroke-width="5"/>
+    <path d="M250 106q0-14 14-14h72q14 0 14 14v40q0 9-9 9h-82q-9 0-9-9z" fill="#edbd30" stroke="#d29c17" stroke-width="5"/>
+    <path d="M246 105h108M258 120h84M258 135h84" stroke="#f8dc73" stroke-width="5"/>
+    <path d="M192 270h214v158H192z" rx="8" fill="url(#label)"/>
+    <path d="M192 270h214v37H192z" fill="#e6bd37"/>
+    <text x="299" y="296" fill="#17462f" font-family="Arial,sans-serif" font-size="17" font-weight="700" text-anchor="middle" letter-spacing="2">BAYER CROP SCIENCE</text>
+    <text x="299" y="362" fill="#fff" font-family="Arial,sans-serif" font-size="48" font-weight="800" text-anchor="middle" letter-spacing="1">NATIVO</text>
+    <path d="M224 376h150" stroke="#a8c88f" stroke-width="2" opacity=".8"/>
+    <text x="299" y="401" fill="#e7edda" font-family="Arial,sans-serif" font-size="14" font-weight="600" text-anchor="middle" letter-spacing="2">FUNGICIDE</text>
+    <path d="M214 456q84 18 170 0v19q0 25-25 25h-120q-25 0-25-25z" fill="#e9e5d6" opacity=".7"/>
+  </g>
+  <text x="300" y="565" fill="#fff" font-family="Arial,sans-serif" font-size="16" font-weight="600" text-anchor="middle" letter-spacing="2" opacity=".9">CROP PROTECTION</text>
+</svg>

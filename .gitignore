@@ -1,0 +1,11 @@
+node_modules/
+.env*
+!.env.example
+dist/
+build/
+*.log
+.DS_Store
+*.pem
+*.key
+backend/data/db/
+frontend/public/varun-profile.jpg
