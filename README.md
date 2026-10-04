@@ -106,6 +106,44 @@ immediately and retry database synchronization when the connection returns.
 These offline copies are device-local until synchronization completes and are
 not available on another device beforehand.
 
+### Fixing an unavailable irrigation schedule
+
+The irrigation API requires MongoDB. This project reads the connection string
+from `backend/.env` using the name `MONGO_URI` (not `MONGODB_URI`):
+
+```env
+MONGO_URI=mongodb://127.0.0.1:27017/krishimitra
+PORT=5000
+```
+
+On Windows, check and start the installed MongoDB service in an elevated
+PowerShell window:
+
+```powershell
+Get-Service MongoDB
+Start-Service MongoDB
+```
+
+If MongoDB is running in Docker Desktop instead, start Docker Desktop first,
+then start the existing container:
+
+```powershell
+docker ps -a --filter "name=mongodb"
+docker start mongodb
+```
+
+Run the API from the backend directory with `npm run dev`. It retries a
+disconnected initial MongoDB connection automatically; after the database is
+ready, check `http://localhost:5000/api/health` and confirm the database status
+is `connected`, then use **Retry** in the irrigation page. The
+`/api/irrigation/my` endpoint also requires a signed-in farmer session; opening
+the API root at `http://localhost:5000/` only checks that the server responds.
+
+An empty database has no assigned turns. The demo seed command (`npm run seed`)
+creates sample irrigation turns, but it **deletes existing application data**
+before reseeding; back up important data and verify the target database before
+running it.
+
 ### Loan finder and repayment estimates
 
 The farmer Loan Tracker includes a loan-purpose finder for crop KCC, allied

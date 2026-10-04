@@ -61,14 +61,29 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
+const MONGO_RETRY_DELAY_MS = 5000;
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
+async function connectToMongo() {
+  if (!process.env.MONGO_URI) {
+    console.error("MongoDB is not configured. Set MONGO_URI in backend/.env.");
+    return;
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 5000 });
     console.log("MongoDB connected");
     void checkAndSendWeatherAlerts();
-  })
-  .catch((err) => console.error("MongoDB connection error. Starting without DB:", err.message));
+  } catch (err) {
+    console.error(
+      `MongoDB connection failed. Retrying in ${MONGO_RETRY_DELAY_MS / 1000} seconds:`,
+      err.message
+    );
+    const retryTimer = setTimeout(() => void connectToMongo(), MONGO_RETRY_DELAY_MS);
+    retryTimer.unref();
+  }
+}
+
+void connectToMongo();
 
 const weatherAlertInterval = setInterval(() => {
   void checkAndSendWeatherAlerts();
