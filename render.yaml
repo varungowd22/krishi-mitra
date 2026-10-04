@@ -2,9 +2,11 @@ services:
   - type: web
     name: krishi-mitra-api
     runtime: node
+    plan: free
     rootDir: backend
     buildCommand: npm ci
     startCommand: npm start
+    healthCheckPath: /api/health
     autoDeploy: true
     envVars:
       - key: NODE_ENV
@@ -17,6 +19,7 @@ services:
   - type: web
     name: krishi-mitra-web
     runtime: static
+    plan: free
     rootDir: frontend
     buildCommand: npm ci && npm run build
     staticPublishPath: dist

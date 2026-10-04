@@ -602,7 +602,7 @@ export default function Login() {
               </button>
             </div>
 
-            {!isRegister && (
+            {!import.meta.env.PROD && !isRegister && (
               <>
                 <div className="km-demo">Demo Accounts</div>
                 <button
