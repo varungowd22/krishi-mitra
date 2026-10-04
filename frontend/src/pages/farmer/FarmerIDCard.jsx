@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Edit2, Save } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
 
-const DEFAULT_FARMER_PHOTO = "/farmer-placeholder.svg";
+const DEFAULT_FARMER_PHOTO = "/varun-profile.jpg";
+const getFarmerPhoto = (photoUrl) =>
+  photoUrl && photoUrl !== "/farmer-placeholder.svg" ? photoUrl : DEFAULT_FARMER_PHOTO;
 
 export default function FarmerIDCard({ user }) {
   const { updateUser } = useAuth();
@@ -16,9 +18,7 @@ export default function FarmerIDCard({ user }) {
   const [mobile, setMobile] = useState(user?.phone || "9353243474");
   const [address, setAddress] = useState(user?.address || "Keregodu, Devanahalli Taluk,\nMandya");
   const [pincode, setPincode] = useState(user?.pincode || "560001");
-  const [photoUrl, setPhotoUrl] = useState(
-    user?.photoUrl && user.photoUrl !== "/varun-profile.jpg" ? user.photoUrl : DEFAULT_FARMER_PHOTO
-  );
+  const [photoUrl, setPhotoUrl] = useState(getFarmerPhoto(user?.photoUrl));
 
   const saveProfileChanges = async (closeEditor = false) => {
     setIsSaving(true);
@@ -38,11 +38,7 @@ export default function FarmerIDCard({ user }) {
       setMobile(savedUser.phone);
       setAddress(savedUser.address || "");
       setPincode(savedUser.pincode || "");
-      setPhotoUrl(
-        savedUser.photoUrl && savedUser.photoUrl !== "/varun-profile.jpg"
-          ? savedUser.photoUrl
-          : DEFAULT_FARMER_PHOTO
-      );
+      setPhotoUrl(getFarmerPhoto(savedUser.photoUrl));
       setIsDirty(false);
       if (closeEditor) setIsEditing(false);
       setSaveSuccess("Saved on this device; database sync will retry automatically.");
@@ -73,8 +69,6 @@ export default function FarmerIDCard({ user }) {
 
   const farmerId = "FID-KA-AE2D66";
   const barcodeNumber = "*AE2D66*";
-  const issuedDate = "6/22/2026";
-
   return (
     <>
       <style>{`
@@ -132,7 +126,7 @@ export default function FarmerIDCard({ user }) {
             border-radius: 8px 8px 0 0;
         }
 
-        .gov-logo {
+        .app-logo {
             width: 62px;
             height: 62px;
             border-radius: 50%;
@@ -145,7 +139,7 @@ export default function FarmerIDCard({ user }) {
             flex-shrink: 0;
         }
 
-        .gov-logo span {
+        .app-logo span {
             font-size: 34px;
             color: #555;
         }
@@ -168,7 +162,7 @@ export default function FarmerIDCard({ user }) {
             color: #555;
         }
 
-        .verified {
+        .demo-badge {
             position: absolute;
             right: 35px;
             top: 55px;
@@ -429,21 +423,19 @@ export default function FarmerIDCard({ user }) {
           <div className="farmer-card">
               <div className="header-line"></div>
               <div className="card-header">
-                  <div className="gov-logo">
-                      <span style={{ color: "#000080", fontSize: "40px" }}>☸</span>
+                  <div className="app-logo">
+                      <span style={{ color: "#315a43", fontSize: "34px" }}>🌱</span>
                   </div>
                   <div className="department">
                       <h1>
-                          DEPARTMENT OF AGRICULTURE · GOVERNMENT OF
-                          <br />
-                          KARNATAKA
+                          KRISHI MITRA · FARMER PROFILE
                       </h1>
                       <p>
-                          ಕೃಷಿ ಇಲಾಖೆ · ಕರ್ನಾಟಕ ಸರ್ಕಾರ
+                          ಕೃಷಿ ಮಿತ್ರ · ರೈತ ಪ್ರೊಫೈಲ್
                       </p>
                   </div>
-                  <div className="verified">
-                      Gov. Verified / ದೃಢೀಕೃತ
+                  <div className="demo-badge">
+                      DEMO · NOT OFFICIAL
                   </div>
               </div>
 
@@ -454,7 +446,7 @@ export default function FarmerIDCard({ user }) {
                       </div>
                       <div className="status">
                           <div className="status-circle"></div>
-                          ACTIVE / ಸಕ್ರಿಯ
+                          PROFILE ACTIVE / ಪ್ರೊಫೈಲ್ ಸಕ್ರಿಯ
                       </div>
                   </div>
 
@@ -519,7 +511,7 @@ export default function FarmerIDCard({ user }) {
 
                   <div className="farmer-id">
                       <div className="label">
-                          FARMER ID / <span>ರೈತ ಐಡಿ</span>
+                          PROFILE ID / <span>ರೈತ ಪ್ರೊಫೈಲ್ ಐಡಿ</span>
                       </div>
                       <div className="id-number">
                           {farmerId}
@@ -540,18 +532,18 @@ export default function FarmerIDCard({ user }) {
 
                   <div className="commissioner">
                       <strong>
-                          AgriComm KA
+                          Krishi Mitra
                       </strong>
                       <p>
-                          COMMISSIONER OF AGRICULTURE
+                          SMART FARMER PROFILE
                       </p>
                       <p>
-                          ಕೃಷಿ ಆಯುಕ್ತರ ಕಚೇರಿ
+                          ಕೃಷಿ ಮಿತ್ರ ರೈತ ಪ್ರೊಫೈಲ್
                       </p>
                   </div>
 
                   <div className="issue">
-                      Issued: {issuedDate} · Karnataka State Farmer Database
+                      Prototype profile · Not a government-issued ID
                   </div>
               </div>
           </div>

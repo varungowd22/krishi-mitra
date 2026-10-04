@@ -8,4 +8,3 @@ build/
 *.pem
 *.key
 backend/data/db/
-frontend/public/varun-profile.jpg
