@@ -14,7 +14,7 @@ const signToken = (user) =>
 router.post("/register", async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({
-      message: "Registration is temporarily unavailable because the database is disconnected.",
+      message: "Registration is unavailable because the backend cannot connect to MongoDB. Start the MongoDB service or configure MONGO_URI, then try again.",
       code: "DATABASE_UNAVAILABLE",
     });
   }
@@ -41,7 +41,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({
-      message: "Sign-in is temporarily unavailable because the database is disconnected.",
+      message: "Sign-in is unavailable because the backend cannot connect to MongoDB. Start the MongoDB service or configure MONGO_URI, then try again.",
       code: "DATABASE_UNAVAILABLE",
     });
   }

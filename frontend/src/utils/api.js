@@ -20,15 +20,6 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (
-      err.response?.status === 503 &&
-      /database-backed user account/i.test(err.response?.data?.message || "")
-    ) {
-      err.response.data.message = "Saved data is temporarily unavailable. Please try again later.";
-    }
-    if (err.response?.data?.code === "DATABASE_UNAVAILABLE") {
-      err.response.data.message = "Unable to complete this action right now. Please try again later.";
-    }
     if (err.response?.status === 401) {
       localStorage.removeItem("km_token");
       localStorage.removeItem("km_user");

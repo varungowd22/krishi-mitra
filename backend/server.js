@@ -35,7 +35,7 @@ app.use((req, res, next) => {
   if (!isWrite || readOnlyPostRoutes.includes(req.path)) return next();
   if (mongoose.connection.readyState === 1) return next();
   return res.status(503).json({
-    message: "Unable to complete this action right now. Please try again later.",
+    message: "The database is disconnected. Reconnect MongoDB and try this action again.",
     code: "DATABASE_UNAVAILABLE",
   });
 });
