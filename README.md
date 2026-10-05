@@ -121,6 +121,12 @@ initial visual screening, not a confirmed diagnosis or verified government
 recommendation. Confirm the cause and any product registration, label, and
 dosage with a local agriculture extension officer before treatment.
 
+### Dairy brand catalogue
+
+The farmer dairy page includes reference package photos supplied for this
+project. Product pack sizes and prices are illustrative; check the actual
+package label and a local retailer for current product details and prices.
+
 ### Emergency SOS alerts
 
 Farmer SOS submissions are stored in MongoDB and appear in the officer

@@ -21,7 +21,7 @@ const DAIRY_BRANDS = [
       { name: "Nandini Toned Milk", variant: "Standardised", fat: "3.0%", snf: "8.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 44, badge: "🔵 Standard", description: "Pasteurised & homogenised toned milk for daily use." },
       { name: "Nandini Full Cream", variant: "Full Cream", fat: "6.0%", snf: "9.0%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 56, badge: "🟠 Full Cream", description: "Rich, creamy full cream milk – ideal for sweets & coffee." },
       { name: "Nandini Buffalo Milk", variant: "Buffalo", fat: "6.5%", snf: "9.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 62, badge: "🟣 Buffalo", description: "Pure buffalo milk with high fat for richer taste." },
-      { name: "Nandini Desi Cow", variant: "Desi Cow", fat: "3.5%", snf: "8.5%", type: "Tetra Pack", sizes: ["200 mL", "500 mL", "1 L"], ratePerLitre: 52, badge: "🟢 A2 Desi", description: "Sourced from indigenous desi cow breeds. A2 protein rich." },
+      { name: "Nandini Desi Cow", variant: "Desi Cow", fat: "3.5%", snf: "8.5%", type: "Tetra Pack", sizes: ["200 mL", "500 mL", "1 L"], ratePerLitre: 52, badge: "🟢 A2 Desi", imagePath: "/milk/nandini-cow-milk.png", description: "Sourced from indigenous desi cow breeds. A2 protein rich." },
       { name: "Nandini Healthy Life", variant: "Skimmed", fat: "0.5%", snf: "9.0%", type: "Tetra Pack", sizes: ["200 mL", "1 L"], ratePerLitre: 40, badge: "💚 Diet", description: "Low-fat skimmed milk for health-conscious consumers." },
       { name: "Nandini Gold", variant: "Premium", fat: "4.5%", snf: "8.5%", type: "Tetra Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 58, badge: "🏅 Gold", description: "Premium standardised milk with enriched nutrition." },
       { name: "Nandini Shubham", variant: "Double Toned", fat: "1.5%", snf: "9.0%", type: "Poly Pack", sizes: ["500 mL"], ratePerLitre: 36, badge: "⚪ Light", description: "Double toned milk – ideal for daily cooking needs." },
@@ -42,9 +42,10 @@ const DAIRY_BRANDS = [
     tagline: "The Taste of India",
     products: [
       { name: "Amul Gold", variant: "Full Cream", fat: "6.0%", snf: "9.0%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 66, badge: "🏅 Gold", description: "Full cream milk – rich in fat for premium taste." },
-      { name: "Amul Taaza", variant: "Toned", fat: "3.0%", snf: "8.5%", type: "Tetra Pack", sizes: ["200 mL", "500 mL", "1 L"], ratePerLitre: 52, badge: "🔵 Taaza", description: "Fresh toned milk processed and packed hygienically." },
+      { name: "Amul Taaza", variant: "Toned", fat: "3.0%", snf: "8.5%", type: "Tetra Pack", sizes: ["200 mL", "500 mL", "1 L"], ratePerLitre: 52, badge: "🔵 Taaza", imagePath: "/milk/amul-taaza.png", description: "Fresh toned milk processed and packed hygienically." },
       { name: "Amul Slim & Trim", variant: "Skimmed", fat: "0.5%", snf: "9.0%", type: "Tetra Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 46, badge: "💚 Slim", description: "Zero fat skimmed milk – perfect for fitness lovers." },
       { name: "Amul Buffalo Milk", variant: "Buffalo", fat: "6.5%", snf: "9.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 68, badge: "🟣 Buffalo", description: "Pure buffalo milk – dense, rich and nutritious." },
+      { name: "Amul Cow Milk", variant: "Cow", fat: "4.0%", snf: "8.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 58, badge: "🐄 Cow Milk", imagePath: "/milk/amul-cow-milk.png", description: "Cow milk. Confirm pack size and nutrition details on the product label." },
       { name: "Amul A2 Desi Gir", variant: "A2 Desi Cow", fat: "4.0%", snf: "8.7%", type: "Tetra Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 80, badge: "🌿 A2", description: "A2 beta-casein protein from purebred Gir cows." },
       { name: "Amul Shakti", variant: "Standardised", fat: "4.5%", snf: "8.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 58, badge: "💪 Shakti", description: "Enriched with calcium and protein. For active families." },
     ],
@@ -63,7 +64,7 @@ const DAIRY_BRANDS = [
     tagline: "Swadesh ka Swad",
     products: [
       { name: "Mother Dairy Full Cream", variant: "Full Cream", fat: "6.0%", snf: "9.0%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 64, badge: "🟠 Full Cream", description: "Thick and creamy milk for daily home use." },
-      { name: "Mother Dairy Toned", variant: "Toned", fat: "3.0%", snf: "8.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 50, badge: "🔵 Toned", description: "Good tasting toned milk packed under NDDB supervision." },
+      { name: "Mother Dairy Toned", variant: "Toned", fat: "3.0%", snf: "8.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 50, badge: "🔵 Toned", imagePath: "/milk/mother-dairy-toned.png", description: "Good tasting toned milk packed under NDDB supervision." },
       { name: "Mother Dairy Token", variant: "Buffalo", fat: "5.0%", snf: "9.0%", type: "Token Booth", sizes: ["Per Litre"], ratePerLitre: 56, badge: "🟣 Token", description: "Freshly dispensed at Mother Dairy token milk booths." },
       { name: "MD Double Toned", variant: "Double Toned", fat: "1.5%", snf: "9.0%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 44, badge: "⚪ Double Toned", description: "Low calorie option for weight-conscious households." },
       { name: "Mother Dairy Cow Milk", variant: "Cow", fat: "3.5%", snf: "8.5%", type: "Tetra Pack", sizes: ["200 mL", "500 mL", "1 L"], ratePerLitre: 54, badge: "🐄 Cow Milk", description: "Pure cow milk for health and wellness." },
@@ -82,8 +83,8 @@ const DAIRY_BRANDS = [
     region: "South India",
     tagline: "Good Food Good Life",
     products: [
-      { name: "Heritage Full Cream", variant: "Full Cream", fat: "6.0%", snf: "9.0%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 62, badge: "🟠 Full Cream", description: "Creamy full fat milk for every occasion." },
-      { name: "Heritage Toned", variant: "Toned", fat: "3.0%", snf: "8.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 48, badge: "🔵 Toned", description: "Standard toned milk for everyday family needs." },
+      { name: "Heritage Full Cream", variant: "Full Cream", fat: "6.0%", snf: "9.0%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 62, badge: "🟠 Full Cream", imagePath: "/milk/heritage-full-cream.png", description: "Creamy full fat milk for every occasion." },
+      { name: "Heritage Toned", variant: "Toned", fat: "3.0%", snf: "8.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 48, badge: "🔵 Toned", imagePath: "/milk/heritage-toned.png", description: "Standard toned milk for everyday family needs." },
       { name: "Heritage Cow Milk", variant: "Cow", fat: "3.5%", snf: "8.5%", type: "Poly Pack", sizes: ["500 mL", "1 L"], ratePerLitre: 52, badge: "🟢 Cow", description: "Pure natural cow milk with wholesome goodness." },
       { name: "Heritage Slim", variant: "Skimmed", fat: "0.5%", snf: "8.7%", type: "Tetra Pack", sizes: ["500 mL"], ratePerLitre: 44, badge: "💚 Slim", description: "Low-fat skimmed milk for diet-conscious consumers." },
       { name: "Heritage Homogenised", variant: "Standardised", fat: "4.5%", snf: "8.5%", type: "Tetra Pack", sizes: ["200 mL", "1 L"], ratePerLitre: 56, badge: "⭐ Premium", description: "Homogenised milk for smooth, uniform texture." },
@@ -100,10 +101,11 @@ const getFatStyle = (fat) => {
   return { bg: "#E0F7FA", text: "#006064", border: "#80DEEA" };
 };
 
-function ProductCard({ product, brandColor, brandName }) {
+function ProductCard({ product, brandColor, brandName, brandImagePath }) {
   const fatStyle = getFatStyle(product.fat);
-  const oneLitreLabel = product.sizes.find((size) => /1\s*(l|litre|liter)/i.test(size)) || "1 L";
   const brandShort = brandName.split(" ").map((part) => part[0]).slice(0, 2).join("").toUpperCase();
+  const packageImagePath = product.imagePath || brandImagePath;
+  const [imageUnavailable, setImageUnavailable] = useState(false);
 
   return (
     <div style={{ background: "#fff", borderRadius: "16px", border: "1px solid #EEF2F7", overflow: "hidden", boxShadow: "0 4px 14px rgba(12, 28, 42, 0.06)" }}>
@@ -113,16 +115,23 @@ function ProductCard({ product, brandColor, brandName }) {
           <span style={{ fontSize: "0.7rem", color: "#888", background: "#F5F5F5", padding: "3px 8px", borderRadius: "20px", whiteSpace: "nowrap" }}>{product.type}</span>
         </div>
 
-        <div style={{ background: "linear-gradient(135deg, #f8fbff 0%, #edf6ff 100%)", border: "1px solid rgba(21, 101, 192, 0.08)", borderRadius: "14px", padding: "12px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px" }}>
-          <div>
-            <div style={{ fontSize: "0.62rem", color: "#6B7280", letterSpacing: "0.09em", fontWeight: 700 }}>ORIGINAL PACK</div>
-            <div style={{ marginTop: "6px", fontSize: "1.3rem", fontWeight: 900, color: brandColor, letterSpacing: "0.04em" }}>{brandShort}</div>
-            <div style={{ fontSize: "0.72rem", color: "#374151", fontWeight: 700 }}>{product.variant}</div>
-          </div>
-          <div style={{ background: brandColor, color: "#fff", borderRadius: "12px", minWidth: "68px", padding: "8px 10px", textAlign: "center", boxShadow: "0 10px 22px rgba(21, 101, 192, 0.16)" }}>
-            <div style={{ fontSize: "0.52rem", fontWeight: 800, letterSpacing: "0.08em", opacity: 0.9 }}>1 LITRE</div>
-            <div style={{ fontSize: "1.1rem", fontWeight: 900, lineHeight: 1.1 }}>{oneLitreLabel.includes("1 L") || oneLitreLabel.includes("1L") ? "1L" : "1 L"}</div>
-          </div>
+        <div style={{ minHeight: "158px", background: "#F8FAFC", border: "1px solid #E8ECF0", borderRadius: "14px", padding: "10px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "6px" }}>
+          {packageImagePath && !imageUnavailable ? (
+            <img
+              src={packageImagePath}
+              alt={product.imagePath ? `${product.name} milk package reference photo` : `${brandName} milk package reference photo; product variant may differ`}
+              loading="lazy"
+              onError={() => setImageUnavailable(true)}
+              style={{ display: "block", width: "100%", height: "126px", objectFit: "contain", borderRadius: "8px", background: "#fff" }}
+            />
+          ) : (
+            <div aria-label={`${brandName} ${product.variant} package photo placeholder`} style={{ width: "100%", height: "126px", display: "grid", placeItems: "center", borderRadius: "8px", background: `linear-gradient(135deg, ${brandColor}12, ${brandColor}24)`, color: brandColor, fontSize: "2rem", fontWeight: 900 }}>
+              {brandShort}
+            </div>
+          )}
+          <span style={{ fontSize: "0.65rem", color: "#667085", textAlign: "center" }}>
+            {product.imagePath ? "Reference package photo · size may vary" : "Brand package reference · variant/size may differ"}
+          </span>
         </div>
 
         <div>
@@ -176,6 +185,7 @@ function ProductCard({ product, brandColor, brandName }) {
 
 function BrandSection({ brand }) {
   const [expanded, setExpanded] = useState(true);
+  const brandImagePath = brand.products.find((product) => product.imagePath)?.imagePath;
   const minRate = Math.min(...brand.products.map((p) => p.ratePerLitre));
   const maxRate = Math.max(...brand.products.map((p) => p.ratePerLitre));
   const minFat = Math.min(...brand.products.map((p) => parseFloat(p.fat)));
@@ -216,7 +226,7 @@ function BrandSection({ brand }) {
           </div>
           <div style={{ padding: "18px 20px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px" }}>
             {brand.products.map((product) => (
-              <ProductCard key={product.name} product={product} brandColor={brand.color} brandName={brand.name} />
+              <ProductCard key={product.name} product={product} brandColor={brand.color} brandName={brand.name} brandImagePath={brandImagePath} />
             ))}
           </div>
         </>
@@ -367,12 +377,12 @@ export default function Dairy() {
               <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
                 <span style={{ fontSize: "2rem" }}>🥛</span>
                 <div>
-                  <div style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", opacity: 0.75, textTransform: "uppercase" }}>Government of Karnataka · Krishi Mitra Portal</div>
-                  <h1 style={{ margin: 0, fontSize: "1.55rem", fontWeight: 900 }}>Official Dairy Product Rates</h1>
+                  <div style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", opacity: 0.75, textTransform: "uppercase" }}>Krishi Mitra · Dairy brands</div>
+                  <h1 style={{ margin: 0, fontSize: "1.55rem", fontWeight: 900 }}>Milk Brands &amp; Indicative Prices</h1>
                 </div>
               </div>
               <p style={{ margin: "8px 0 0 0", opacity: 0.82, fontSize: "0.86rem", maxWidth: "560px", lineHeight: 1.6 }}>
-                Authorised dairy brand rates with FAT %, SNF %, pack type &amp; variants — updated October 2026.
+                Browse familiar dairy brands, package photos, product variants, and listed pack sizes. Sample prices are for demonstration and may not match current local prices.
               </p>
               <div style={{ display: "flex", gap: "14px", marginTop: "18px", flexWrap: "wrap" }}>
                 {[
@@ -414,9 +424,8 @@ export default function Dairy() {
             <BrandSection key={brand.id} brand={brand} />
           ))}
 
-          <div style={{ textAlign: "center", fontSize: "0.74rem", color: "#bbb", padding: "14px", borderTop: "1px solid #EEE" }}>
-            * Prices are indicative and subject to change as per official Government Gazette notifications.
-            Source: KMF, GCMMF (Amul), Mother Dairy, Heritage Foods – October 2026.
+          <div style={{ textAlign: "center", fontSize: "0.74rem", color: "#667085", padding: "14px", borderTop: "1px solid #EEE" }}>
+            Sample prices and product details are illustrative, not live or independently verified. Package photos are references supplied for this project; check the actual label and local retailer for size, ingredients, and current price.
           </div>
         </div>
       )}
